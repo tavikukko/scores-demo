@@ -1,87 +1,146 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Easy Scoring Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="A demo of how to show bowling scores in a responsive html table">
+    <meta name="author" content="Simon Elvery">
 
-  <title>Scores-demo</title>
-  <meta name="description" content="bowling scoreboard">
+    <link href="bootstrap.min.css" rel="stylesheet">
+	<style>
+      body { padding-top: 60px; }
+	  table { width: 100%; }
+	  td, th {text-align: left; white-space: nowrap;}
+	  td.numeric, th.numeric { text-align: right; }
+	  h2, h3 {margin-top: 1em;}
+	  section {padding-top: 40px;}
+    </style>
+    <link href="bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="unseen.css" rel="stylesheet">
+	<link href="prettify.css" rel="stylesheet">
+	    <script src="jquery-1.7.1.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<script type="text/javascript">
+$(document).ready(function() {
+        $(function listScores() {
+                $.getJSON( "https://spreadsheets.google.com/feeds/list/0Av9InR3y96nBdDZ0Sk5xcTJVYVB0ajBnZlMzZDdfZGc/od6/public/values?alt=json-in-script&callback=?",
+                        function (data) {
+                                var i = 0;
+                                $.each(data.feed.entry, function(i,entry) {
+                                        if(i == 0)
+                                        {
+                                                var head = '<thead>';
+                                                head += '<tr>';
+                                                head += '<th class="essential persist">Sija</th>';
+                                                head += '<th class="essential">Etunimi</th>';
+                                                head += '<th class="essential">Sukunimi</th>';
+                                                head += '<th>Uusinta</th>';
+                                                head += '<th class="essential">Joukkue</th>';
+                                                head += '<th>Maa</th>';
+                                                head += '<th>Puhdastulos</th>';
+                                                head += '<th>Tasoitus</th>';
+                                                head += '<th class="essential">Yhteistulos</th>';
+                                                head += '<th>S1</th>';
+                                                head += '<th>S2</th>';
+                                                head += '<th>S3</th>';
+                                                head += '<th>S4</th>';
+                                                head += '<th>S5</th>';
+                                                head += '<th>S6</th>';
+                                                head += '<th>Keskiarvo</th>';
+                                                head += '<th>Paras</th>';
+                                                head += '</tr>';
+                                                head += '</thead>';
+                                                $('#scores-list').append(head);
+                                        }
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+                                        $('#scores-list').append('<tr class="items" id="item' + i + '"></tr>');
+                                        var item = '<td>' + entry.gsx$sija.$t + '</td>';
+                                        item += '<td>' + entry.gsx$etunimi.$t + '</td>';
+                                        item += '<td>' + entry.gsx$sukunimi.$t + '</td>';
+                                        item += '<td>' + entry.gsx$uusinta.$t + '</td>';
+                                        item += '<td>' + entry.gsx$joukkue.$t + '</td>';
+                                        item += '<td>' + entry.gsx$maa.$t + '</td>';
+                                        item += '<td>' + entry.gsx$puhdastulos.$t + '</td>';
+                                        item += '<td>' + entry.gsx$tasoitus.$t + '</td>';
+                                        item += '<td>' + entry.gsx$yhteistulos.$t + '</td>';
+                                        item += '<td>' + entry.gsx$s1.$t + '</td>';
+                                        item += '<td>' + entry.gsx$s2.$t + '</td>';
+                                        item += '<td>' + entry.gsx$s3.$t + '</td>';
+                                        item += '<td>' + entry.gsx$s4.$t + '</td>';
+                                        item += '<td>' + entry.gsx$s5.$t + '</td>';
+                                        item += '<td>' + entry.gsx$s6.$t + '</td>';
+                                        item += '<td>' + entry.gsx$keskiarvo.$t + '</td>';
+                                        item += '<td>' + entry.gsx$paras.$t + '</td>';
+                                        $('#item' + i).append(item);
+                                        i = i + 1;
+                                });
+                        }
+                );
+        });
 
-</head>
+        $(function listInfo() {
+                $.getJSON( "https://spreadsheets.google.com/feeds/list/0Av9InR3y96nBdDZ0Sk5xcTJVYVB0ajBnZlMzZDdfZGc/od7/public/values?alt=json-in-script&callback=?",
+                        function (data) {
+                                var x = 0;
+                                $.each(data.feed.entry, function(i,entry) {
+                                        if(x == 0)
+                                        {
+                                                var desc = '<h1>' + entry.gsx$nimi.$t + '</h1>';
+                                                desc += '<p>' + entry.gsx$kuvaus.$t + '</p>';
+						desc += '<h2>Halli</h2><p>' + entry.gsx$halli.$t + '</p>';
+                                                desc += '<h2>Erät</h2><p>' + entry.gsx$erät.$t + '</p>';
+						$('#desc').append(desc);
+                                        }
+                                        x = x + 1;
+                                });
+                        }
+                );
+        });
 
-<body>
 
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Scores-demo</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">bowling scoreboard</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/tavikukko/scores-demo/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/tavikukko/scores-demo/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/tavikukko/scores-demo" class="code">View Scores-demo on GitHub</a>
+});
+</script>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Easy Scoring Demo</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+	    <p class="navbar-text pull-right">Mostly responsible <a href="">Tomi Tavela</a></p>
+          </div><!--/.nav-collapse -->
         </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
-          <h3>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </article>
       </div>
     </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/tavikukko" class="avatar"><img src="https://secure.gravatar.com/avatar/b3ff58ad5d4f4ee85b68310ca90b2e6d?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/tavikukko">tavikukko</a> maintains <a href="https://github.com/tavikukko/scores-demo">Scores-demo</a></p>
 
+    <div class="container-fluid">
+	<div id="desc"></div>
+	<section id="unseen">
+		  <table class="table-bordered table-striped table-condensed" id="scores-list"> </table>
+	</section>
+	  
+    </div> <!-- /container -->
 
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/tavikukko/scores-demo/tarball/master" class="tar">tar</a><a href="https://github.com/tavikukko/scores-demo/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
-
-  
-</body>
+	<script src="prettify.js"></script>
+	<script>
+		$(function(){
+			prettyPrint();
+		});
+	</script>
+  </body>
 </html>
