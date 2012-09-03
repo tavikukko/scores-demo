@@ -2,9 +2,9 @@ $(document).ready(function() {
         $(function listScores() {
                 $.getJSON( "https://spreadsheets.google.com/feeds/list/0Av9InR3y96nBdFpBRnNCMU9ENFF0NEZxMEN5dXdEQVE/od6/public/values?alt=json-in-script&callback=?",
                         function (data) {
-                                var i = 0;
+                                var x = 0;
                                 $.each(data.feed.entry, function(i,entry) {
-                                        if(i == 0)
+                                        if(x == 0)
                                         {
                                                 var head = '<thead>';
                                                 head += '<tr>';
@@ -23,12 +23,12 @@ $(document).ready(function() {
                                                 $('#scores-list').append(head);
                                         }
 
-                                        $('#scores-list').append('<tr class="items" id="item' + i + '"></tr>');
+                                        $('#scores-list').append('<tr class="items" id="item' + x + '"></tr>');
                                         var item = '<td>' + entry.gsx$nimi.$t + 
-                                        $('#item' + i).append(item);
-                                        i = i + 1;
+                                        $('#item' + x).append(item);
+                                        x = x + 1;
                                 });
-                          alert(i);
+                          alert(x);
                         }
                 );
         });
