@@ -24,16 +24,7 @@ $(document).ready(function() {
                                         }
 
                                         $('#scores-list').append('<tr class="items" id="item' + i + '"></tr>');
-                                        var item = '<td>' + entry.gsx$luokatm-d.$t + '</td>';
-                                        item += '<td>' + entry.gsx$nimi.$t + '</td>';
-                                        item += '<td>' + entry.gsx$seura.$t + '</td>';
-                                        item += '<td>' + entry.gsx$ryhmä.$t + '</td>';
-                                        item += '<td>' + entry.gsx$luokka.$t + '</td>';
-                                        item += '<td>' + entry.gsx$keilaajankeskiarvo.$t + '</td>';
-                                        item += '<td>' + entry.gsx$sukupuoli.$t + '</td>';
-                                        item += '<td>' + entry.gsx$liitto.$t + '</td>';
-                                        item += '<td>' + entry.gsx$tulos.$t + '</td>';
-                                        item += '<td>' + entry.gsx$tasoitus.$t + '</td>';
+                                        var item = '<td>' + entry.gsx$nimi.$t + 
                                         $('#item' + i).append(item);
                                         i = i + 1;
                                 });
