@@ -1,6 +1,6 @@
 $(document).ready(function() {
         $(function listScores() {
-                $.getJSON( "https://spreadsheets.google.com/feeds/list/0Av9InR3y96nBdDZ0Sk5xcTJVYVB0ajBnZlMzZDdfZGc/od6/public/values?alt=json-in-script&callback=?",
+                $.getJSON( "https://spreadsheets.google.com/feeds/list/0Av9InR3y96nBdFpBRnNCMU9ENFF0NEZxMEN5dXdEQVE/od6/public/values?alt=json-in-script&callback=?",
                         function (data) {
                                 var i = 0;
                                 $.each(data.feed.entry, function(i,entry) {
@@ -9,45 +9,31 @@ $(document).ready(function() {
                                                 var head = '<thead>';
                                                 head += '<tr>';
                                                 head += '<th class="essential persist">Sija</th>';
-                                                head += '<th class="essential">Etunimi</th>';
-                                                head += '<th class="essential">Sukunimi</th>';
-                                                head += '<th>Uusinta</th>';
-                                                head += '<th class="essential">Joukkue</th>';
-                                                head += '<th>Maa</th>';
-                                                head += '<th>Puhdastulos</th>';
+                                                head += '<th class="essential">Nimi</th>';
+                                                head += '<th class="essential">Seura</th>';
+                                                head += '<th>Ryhmä</th>';
+                                                head += '<th class="essential">Luokka</th>';
+                                                head += '<th>Keilaajan keskiarvo</th>';
+                                                head += '<th>Sukupuoli</th>';
+                                                head += '<th>Liitto</th>';
+                                                head += '<th class="essential">Tulos</th>';
                                                 head += '<th>Tasoitus</th>';
-                                                head += '<th class="essential">Yhteistulos</th>';
-                                                head += '<th>S1</th>';
-                                                head += '<th>S2</th>';
-                                                head += '<th>S3</th>';
-                                                head += '<th>S4</th>';
-                                                head += '<th>S5</th>';
-                                                head += '<th>S6</th>';
-                                                head += '<th>Keskiarvo</th>';
-                                                head += '<th>Paras</th>';
                                                 head += '</tr>';
                                                 head += '</thead>';
                                                 $('#scores-list').append(head);
                                         }
 
                                         $('#scores-list').append('<tr class="items" id="item' + i + '"></tr>');
-                                        var item = '<td>' + entry.gsx$sija.$t + '</td>';
-                                        item += '<td>' + entry.gsx$etunimi.$t + '</td>';
-                                        item += '<td>' + entry.gsx$sukunimi.$t + '</td>';
-                                        item += '<td>' + entry.gsx$uusinta.$t + '</td>';
-                                        item += '<td>' + entry.gsx$joukkue.$t + '</td>';
-                                        item += '<td>' + entry.gsx$maa.$t + '</td>';
-                                        item += '<td>' + entry.gsx$puhdastulos.$t + '</td>';
+                                        var item = '<td>' + entry.gsx$luokatm-d.$t + '</td>';
+                                        item += '<td>' + entry.gsx$nimi.$t + '</td>';
+                                        item += '<td>' + entry.gsx$seura.$t + '</td>';
+                                        item += '<td>' + entry.gsx$ryhmä.$t + '</td>';
+                                        item += '<td>' + entry.gsx$luokka.$t + '</td>';
+                                        item += '<td>' + entry.gsx$keilaajankeskiarvo.$t + '</td>';
+                                        item += '<td>' + entry.gsx$sukupuoli.$t + '</td>';
+                                        item += '<td>' + entry.gsx$liitto.$t + '</td>';
+                                        item += '<td>' + entry.gsx$tulos.$t + '</td>';
                                         item += '<td>' + entry.gsx$tasoitus.$t + '</td>';
-                                        item += '<td>' + entry.gsx$yhteistulos.$t + '</td>';
-                                        item += '<td>' + entry.gsx$s1.$t + '</td>';
-                                        item += '<td>' + entry.gsx$s2.$t + '</td>';
-                                        item += '<td>' + entry.gsx$s3.$t + '</td>';
-                                        item += '<td>' + entry.gsx$s4.$t + '</td>';
-                                        item += '<td>' + entry.gsx$s5.$t + '</td>';
-                                        item += '<td>' + entry.gsx$s6.$t + '</td>';
-                                        item += '<td>' + entry.gsx$keskiarvo.$t + '</td>';
-                                        item += '<td>' + entry.gsx$paras.$t + '</td>';
                                         $('#item' + i).append(item);
                                         i = i + 1;
                                 });
