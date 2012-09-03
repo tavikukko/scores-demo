@@ -24,7 +24,7 @@ $(document).ready(function() {
                                         }
 
                                         $('#scores-list').append('<tr class="items" id="item' + x + '"></tr>');
-                                        var item = '<td>' + x + '</td>';
+                                        var item = '<td>' + x+1 + '</td>';
                                         item += '<td>' + entry.gsx$nimi.$t + '</td>';
                                         item += '<td>' + entry.gsx$seura.$t + '</td>';
                                         item += '<td></td>';
