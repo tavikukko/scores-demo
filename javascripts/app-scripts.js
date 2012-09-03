@@ -2,9 +2,9 @@ $(document).ready(function() {
         $(function listScores() {
                 $.getJSON( "https://spreadsheets.google.com/feeds/list/0Av9InR3y96nBdFpBRnNCMU9ENFF0NEZxMEN5dXdEQVE/od6/public/values?alt=json-in-script&callback=?",
                         function (data) {
-                                var x = 0;
+                                var x = 1;
                                 $.each(data.feed.entry, function(i,entry) {
-                                        if(x == 0)
+                                        if(x == 1)
                                         {
                                                 var head = '<thead>';
                                                 head += '<tr>';
@@ -24,7 +24,7 @@ $(document).ready(function() {
                                         }
 
                                         $('#scores-list').append('<tr class="items" id="item' + x + '"></tr>');
-                                        var item = '<td>' + x+1 + '</td>';
+                                        var item = '<td>' + x + '</td>';
                                         item += '<td>' + entry.gsx$nimi.$t + '</td>';
                                         item += '<td>' + entry.gsx$seura.$t + '</td>';
                                         item += '<td></td>';
