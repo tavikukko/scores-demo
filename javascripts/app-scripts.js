@@ -27,7 +27,7 @@ $(document).ready(function() {
                                         var item = '<td>' + entry.gsx$luokatm-d.$t + '</td>';
                                         item += '<td>' + entry.gsx$nimi.$t + '</td>';
                                         item += '<td>' + entry.gsx$seura.$t + '</td>';
-                                        item += '<td>' + entry.gsx$ryhmä.$t + '</td>';
+                                        
                                         item += '<td>' + entry.gsx$luokka.$t + '</td>';
                                         item += '<td>' + entry.gsx$keilaajankeskiarvo.$t + '</td>';
                                         item += '<td>' + entry.gsx$sukupuoli.$t + '</td>';
