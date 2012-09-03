@@ -24,7 +24,7 @@ $(document).ready(function() {
                                         }
 
                                         $('#scores-list').append('<tr class="items" id="item' + x + '"></tr>');
-                                        var item = '<td>' + entry.gsx$nimi.$t + '</td>'
+                                        var item = '<td>' + entry.gsx$nimi.$t + '</td>';
                                         $('#item' + x).append(item);
                                         x = x + 1;
                                 });
