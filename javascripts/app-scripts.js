@@ -37,7 +37,6 @@ $(document).ready(function() {
                                         $('#item' + x).append(item);
                                         x = x + 1;
                                 });
-                          alert(x);
                         }
                 );
         });
