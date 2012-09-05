@@ -14,3 +14,15 @@
         #unseen table td:nth-child(10),
         #unseen table th:nth-child(10){display: none;}
 }
+@media only screen and (max-width: 480px) {
+        #unseen table td:nth-child(3),
+        #unseen table th:nth-child(3),
+        #unseen table td:nth-child(4),
+        #unseen table th:nth-child(4),
+        #unseen table td:nth-child(6),
+        #unseen table th:nth-child(6),
+        #unseen table td:nth-child(7),
+        #unseen table th:nth-child(7),
+        #unseen table td:nth-child(8),
+        #unseen table th:nth-child(8){display: none;}
+}
